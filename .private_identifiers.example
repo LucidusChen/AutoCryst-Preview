@@ -1,0 +1,5 @@
+# Copy to .private_identifiers locally, replace these fictional examples, and restrict
+# its permissions. The real list is required, ignored, and must never be committed.
+# One case-insensitive literal per line; blank lines and comment lines are ignored.
+FICTIONAL-PRIVATE-CASE
+/Users/fictional-owner

@@ -1,0 +1,581 @@
+{
+  "notes": "Representative result examples; schemas and imported backend tables are authoritative. Placeholder paths and fictional run ids are documentation only.",
+  "cases": [
+    {
+      "name": "hello-1",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-1",
+        "op": "hello",
+        "params": {}
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-1",
+        "ok": true,
+        "result": {
+          "operations": [
+            "hello",
+            "describe",
+            "preview",
+            "submit",
+            "status",
+            "summary",
+            "cancel",
+            "export",
+            "scene",
+            "checkcif"
+          ],
+          "max_request_bytes": 1048576,
+          "max_response_bytes": 16777216,
+          "transport": "local-json-lines",
+          "synthetic_only": true,
+          "automatic_replay": false,
+          "scientifically_validated": false
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-1",
+        "op": "hello",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-1",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "describe-2",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-2",
+        "op": "describe",
+        "params": {
+          "language": "en"
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-2",
+        "ok": true,
+        "result": {
+          "language": "en",
+          "presentation_contract": "2026-11-16",
+          "presentation_review_pending": true,
+          "dataclasses": {},
+          "groups": {},
+          "stops": {},
+          "decisions": {}
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-2",
+        "op": "describe",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-2",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "preview-3",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-3",
+        "op": "preview",
+        "params": {
+          "frontend_contract": "2026-11-20",
+          "request": {
+            "ins_path": "<repo>/runs/inputs/demo.ins",
+            "hkl_path": "<repo>/runs/inputs/demo.hkl",
+            "mode": "mock_demo",
+            "device": "auto",
+            "cycle": {
+              "iterations": 2
+            }
+          }
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-3",
+        "ok": true,
+        "result": {
+          "phase": "ready",
+          "ready_static": true,
+          "blockers": [],
+          "scientifically_validated": false,
+          "expert_reference_used": false
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-3",
+        "op": "preview",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-3",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "submit-4",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-4",
+        "op": "submit",
+        "params": {
+          "frontend_contract": "2026-11-20",
+          "request": {
+            "ins_path": "<repo>/runs/inputs/demo.ins",
+            "hkl_path": "<repo>/runs/inputs/demo.hkl",
+            "mode": "mock_demo",
+            "device": "auto",
+            "cycle": {
+              "iterations": 2
+            }
+          }
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-4",
+        "ok": true,
+        "result": {
+          "run_id": "r-20000101T000000Z-01234567"
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-4",
+        "op": "submit",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-4",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "status-5",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-5",
+        "op": "status",
+        "params": {
+          "run_id": "r-20000101T000000Z-01234567"
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-5",
+        "ok": true,
+        "result": {
+          "phase": "completed",
+          "stop_code": "fixed_rounds_completed",
+          "stop_detail": null
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-5",
+        "op": "status",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-5",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "summary-6",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-6",
+        "op": "summary",
+        "params": {
+          "run_id": "r-20000101T000000Z-01234567"
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-6",
+        "ok": true,
+        "result": {
+          "phase": "completed",
+          "stop_code": "fixed_rounds_completed",
+          "mode": "mock_demo",
+          "scientifically_validated": false,
+          "checkcif_status": "NOT_EVALUATED"
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-6",
+        "op": "summary",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-6",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "cancel-7",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-7",
+        "op": "cancel",
+        "params": {
+          "run_id": "r-20000101T000000Z-01234567"
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-7",
+        "ok": true,
+        "result": {
+          "requested": false,
+          "terminal_observed": false
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-7",
+        "op": "cancel",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-7",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "export-8",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-8",
+        "op": "export",
+        "params": {
+          "run_id": "r-20000101T000000Z-01234567",
+          "destination": "<repo>/runs/export-new"
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-8",
+        "ok": true,
+        "result": {
+          "seal_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "outputs": [
+            {
+              "role": "model",
+              "path": "<repo>/runs/export-new/ai_solved.res",
+              "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "size": 512
+            }
+          ],
+          "missing_roles": [
+            "cif",
+            "fcf"
+          ]
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-8",
+        "op": "export",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-8",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "scene-9",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-9",
+        "op": "scene",
+        "params": {
+          "run_id": "r-20000101T000000Z-01234567",
+          "max_sites": 1000
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-9",
+        "ok": true,
+        "result": {
+          "schema": "autocryst.scene/1",
+          "run_id": "r-20000101T000000Z-01234567",
+          "seal_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "candidate_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "units": "angstrom",
+          "fractional_to_cartesian_rows": [
+            [
+              10,
+              0,
+              0
+            ],
+            [
+              0,
+              10,
+              0
+            ],
+            [
+              0,
+              0,
+              10
+            ]
+          ],
+          "scientifically_validated": false,
+          "payload": {
+            "atoms": [],
+            "bonds": [],
+            "cell": {
+              "a": 10,
+              "b": 10,
+              "c": 10,
+              "alpha": 90,
+              "beta": 90,
+              "gamma": 90
+            }
+          }
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-9",
+        "op": "scene",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-9",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "checkcif-10",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-10",
+        "op": "checkcif",
+        "params": {
+          "action": "start",
+          "run_id": "r-20000101T000000Z-01234567",
+          "timeout_s": 60,
+          "allow_builtin_checkdef": true
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-10",
+        "ok": true,
+        "result": {
+          "checkcif_id": "c-11111111111111111111111111111111",
+          "run_id": "r-20000101T000000Z-01234567",
+          "phase": "queued",
+          "owner_pid": 1234,
+          "local_only": true,
+          "official_iucr_online_check": false,
+          "seal_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-10",
+        "op": "checkcif",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-10",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "checkcif-11",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-11",
+        "op": "checkcif",
+        "params": {
+          "action": "status",
+          "run_id": "r-20000101T000000Z-01234567",
+          "checkcif_id": "c-11111111111111111111111111111111"
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-11",
+        "ok": true,
+        "result": {
+          "checkcif_id": "c-11111111111111111111111111111111",
+          "run_id": "r-20000101T000000Z-01234567",
+          "phase": "completed",
+          "local_only": true,
+          "result": {
+            "status": "NOT_EVALUATED",
+            "invocations": 0,
+            "official_iucr_online_check": false
+          }
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-11",
+        "op": "checkcif",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-11",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    },
+    {
+      "name": "checkcif-12",
+      "request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-12",
+        "op": "checkcif",
+        "params": {
+          "action": "cancel",
+          "run_id": "r-20000101T000000Z-01234567",
+          "checkcif_id": "c-11111111111111111111111111111111"
+        }
+      },
+      "response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-12",
+        "ok": true,
+        "result": {
+          "requested": false,
+          "terminal_observed": true
+        }
+      },
+      "error_request": {
+        "protocol": "2026-11-20.1",
+        "id": "example-12",
+        "op": "checkcif",
+        "params": {
+          "unexpected_field": true
+        }
+      },
+      "error_response": {
+        "protocol": "2026-11-20.1",
+        "frontend_contract": "2026-11-20",
+        "id": "example-12",
+        "ok": false,
+        "error": {
+          "code": "invalid_params",
+          "message": "Unknown or missing operation fields"
+        }
+      }
+    }
+  ]
+}

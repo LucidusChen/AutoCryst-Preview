@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crystalx-native-tools"
+dynamic = ["version"]
+description = "Discovery, static inspection, strict-native policy and build plans for the owner's own SHELX/PLATON executables."
+readme = "README.md"
+requires-python = ">=3.10"
+# Standard library plus the dependency-free core. No third-party package.
+dependencies = ["crystalx-core>=0.6.1,<0.7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+crystalx-tools = "crystalx_native_tools.cli:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "crystalx_native_tools.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["crystalx_native_tools*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

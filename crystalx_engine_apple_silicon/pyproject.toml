@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crystalx-engine-apple-silicon"
+dynamic = ["version"]
+description = "Experimental native-torch CPU/MPS adapter for a user-supplied CrystalX snapshot"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["crystalx-core>=0.6.1", "torch>=2.2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+crystalx-apple = "crystalx_engine_apple_silicon.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "crystalx_engine_apple_silicon.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["mps: requires a real available MPS device"]

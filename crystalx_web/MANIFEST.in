@@ -1,0 +1,10 @@
+include README.md
+include pyproject.toml
+include MANIFEST.in
+recursive-include tests *.py
+recursive-include scripts *.sh
+global-exclude *.py[cod]
+global-exclude .DS_Store
+prune runs
+prune build
+prune dist

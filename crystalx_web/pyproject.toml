@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crystalx-web"
+dynamic = ["version"]
+description = "Local Gradio Web interface for the CrystalX/AutoCryst workflow core."
+readme = "README.md"
+requires-python = ">=3.10"
+
+# The Web interface is the only place Gradio is allowed. The core stays dependency-free.
+dependencies = [
+    "crystalx-core>=0.6.1,<0.7",
+    "crystalx-native-tools>=0.1.0.dev0,<0.2",
+    "gradio>=6.30,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+# Headless-browser tests. Uses an already installed Chromium; nothing is downloaded by the tests.
+e2e = ["playwright>=1.56"]
+
+[project.scripts]
+crystalx-web = "crystalx_web.launcher:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "crystalx_web.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["crystalx_web*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "e2e: drives the running interface in a headless browser; needs playwright and Chromium",
+]
+addopts = "--strict-markers"

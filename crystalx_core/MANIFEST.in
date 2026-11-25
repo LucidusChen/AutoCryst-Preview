@@ -1,0 +1,29 @@
+# Source-distribution contents.
+#
+# setuptools' default file-finder picks up ``tests/test_*.py`` but NOT ``tests/conftest.py``.
+# Every test module in this suite imports fixtures from conftest, so an sdist without it
+# installs cleanly and then fails at collection. Verified by unpacking the sdist into a fresh
+# virtual environment and running pytest there -- not by running pytest in the source tree,
+# which cannot see this class of defect.
+
+include README.md
+include pyproject.toml
+include MANIFEST.in
+include IDE_TASKS.md
+
+recursive-include tests *.py
+
+# egg-info residue generated during the build; not part of the source.
+exclude setup.cfg
+recursive-exclude src *.egg-info
+prune src/crystalx_core.egg-info
+
+# Never ship generated or local artefacts.
+global-exclude *.py[cod]
+global-exclude .DS_Store
+prune .pytest_cache
+prune runs
+prune build
+prune dist
+
+recursive-include scripts *.sh

@@ -1,0 +1,15 @@
+AutoCryst (preview) — notice
+
+This project builds on CrystalX (Zheng et al., J. Am. Chem. Soc. 2026, doi:10.1021/jacs.5c21832;
+upstream code at https://github.com/InternScience/CrystalX).
+
+This public repository contains only this project's own code: the workflow engine, the Web GUI,
+the Apple silicon runtime adapter, tool discovery and the frontend bridge. It does NOT contain:
+
+  - the upstream CrystalX source code or its model weights; obtain them from the upstream
+    project;
+  - SHELX, PLATON or any other crystallographic executable;
+  - experimental data, results, papers or manuals.
+
+The upstream authors have not reviewed or endorsed this project, and nothing here grants
+rights to upstream code or weights.

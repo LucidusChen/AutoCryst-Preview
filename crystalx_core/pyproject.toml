@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crystalx-core"
+dynamic = ["version"]
+description = "Platform-neutral workflow core for the AutoCryst / CrystalX GUI crystallography pipeline."
+readme = "README.md"
+requires-python = ">=3.10"
+
+# Deliberately empty, and asserted by a test. The core must install and run anywhere,
+# including on a machine that has no crystallographic software at all.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+# Optional crystallographic helpers. The core never imports gemmi; only
+# crystalx_core.providers.gemmi_provider does, and only when an application asks for it.
+# Chosen over cctbx for size and installability (native arm64 wheel, ~MB not ~GB).
+geo = ["gemmi>=0.6"]
+
+[project.scripts]
+crystalx = "crystalx_core.cli.main:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "crystalx_core.version.CORE_VERSION" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["crystalx_core*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["error"]
+markers = [
+    "real_tools: needs real, locally installed SHELX/PLATON binaries; opt in with CRYSTALX_REAL_TOOLS=1",
+    "platon_data: reads the user's own PLATON distribution via CRYSTALX_PLATON_TEST_DIR",
+]
+addopts = "--strict-markers"

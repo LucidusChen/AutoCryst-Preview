@@ -1,0 +1,48 @@
+{
+  "schema": "crystalx.app-pins/1",
+  "note": "Inputs of CrystalX Demo.app. Every file is checked against these SHA-256 digests before use. Nothing is downloaded unless the build is started with --download.",
+  "targets": {
+    "macos-arm64": {
+      "bundle_name": "CrystalX Demo.app",
+      "python": {
+        "implementation": "CPython",
+        "version": "3.12.14",
+        "distribution": "python-build-standalone 20260929, aarch64-apple-darwin, install_only_stripped",
+        "archive": "cpython-3.12.14+20260929-aarch64-apple-darwin-install_only_stripped.tar.gz",
+        "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20260929/cpython-3.12.14%2B20260929-aarch64-apple-darwin-install_only_stripped.tar.gz",
+        "sha256": "1bb3e53d231ee2c8881e8daf6426f4dd95bff0dda496af0f3af300357aa998d0",
+        "digest_source": "pbs-installer 2026.10.21 (PyPI), pbs_installer/_versions.py"
+      },
+      "pip_target": {
+        "platforms": ["macosx_14_0_arm64", "macosx_13_0_arm64", "macosx_12_0_arm64", "macosx_11_0_arm64"],
+        "python_version": "3.12",
+        "implementation": "cp"
+      },
+      "lock": "requirements-macos-arm64.txt",
+      "min_macos": "14.0",
+      "launcher": {
+        "source": "launcher.c",
+        "zig": "0.13.0",
+        "zig_target": "aarch64-macos.13.0",
+        "clang_flags": ["-arch", "arm64", "-mmacosx-version-min=13.0", "-O2"]
+      }
+    },
+    "linux-x86_64": {
+      "bundle_name": "CrystalX Demo",
+      "purpose": "stand-in used only to test the bundle layout and launch logic on Linux; not a product",
+      "python": {
+        "implementation": "CPython",
+        "version": "3.10",
+        "distribution": "a local python-build-standalone install (for example uv-managed), given with --python-dir"
+      },
+      "pip_target": {
+        "platforms": ["manylinux_2_28_x86_64", "manylinux_2_24_x86_64", "manylinux_2_17_x86_64", "manylinux2014_x86_64"],
+        "python_version": "3.10",
+        "implementation": "cp"
+      },
+      "lock": null,
+      "min_macos": null,
+      "launcher": {"source": "launcher.c", "cc": "cc"}
+    }
+  }
+}

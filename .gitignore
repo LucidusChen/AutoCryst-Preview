@@ -1,0 +1,104 @@
+# --------------------------------------------------------------------------------------
+# User-supplied, licensed crystallographic executables must never be committed.
+# SHELX, PLATON and friends are the user's own legally obtained installations. This
+# repository resolves and invokes them; it never downloads, compiles, bundles or
+# redistributes them.
+# --------------------------------------------------------------------------------------
+/toolbox/*
+!/toolbox/.gitkeep
+
+# The PLATON distribution's own test data is read in place, never copied in.
+/platon_instruction/TEST/
+
+# --------------------------------------------------------------------------------------
+# EXPERIMENTAL DATA -- NEVER COMMITTED, NEVER PUBLISHED.
+#
+# realdata_examples/ holds the owner's own measurements and a supervisor's unpublished
+# reference structure. The complete archive, including manifests, indexes, descriptions
+# and empty-directory markers, is private. Generic contracts and synthetic examples live
+# outside this archive. Ignore rules do not remove files from existing Git history.
+# --------------------------------------------------------------------------------------
+/realdata_examples/**
+
+# Belt and braces: raw measurement formats are refused anywhere in the tree, so a case
+# dropped into the wrong folder is still not committable. Deliberately NOT listed here are
+# .ins / .res / .cif -- a future hand-written synthetic fixture may legitimately
+# need to be tracked; the /realdata_examples/** rule above is what protects the real ones.
+*.hkl
+*.hkl_od
+*.cif_od
+*.raw
+*.img
+*.rodhypix
+*.esp
+
+# Escape hatch: small, hand-authored, non-confidential fixtures may be tracked here.
+!/crystalx_core/tests/fixtures/**
+
+# --------------------------------------------------------------------------------------
+# Local Python environments and personal configuration.
+# --------------------------------------------------------------------------------------
+.venv/
+venv/
+/.env
+/.env.*
+/config.local.json
+
+# --------------------------------------------------------------------------------------
+# Build, packaging and test artefacts.
+# --------------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --------------------------------------------------------------------------------------
+# Transfer archives. These are a way of moving a tree between machines, not a release
+# artefact, and must not enter version control or a distribution.
+# --------------------------------------------------------------------------------------
+*.tar.gz
+*.tgz
+*.zip
+_to_delete_*
+
+# --------------------------------------------------------------------------------------
+# Run workspaces. Every solve writes an immutable directory under runs/; these are the
+# user's own results and belong to them, not to the repository.
+# --------------------------------------------------------------------------------------
+runs/
+/scratch/
+
+# --------------------------------------------------------------------------------------
+# Model weights are large and separately licensed; they are fetched, never committed.
+# --------------------------------------------------------------------------------------
+*.ckpt
+*.pt
+*.pth
+
+# --------------------------------------------------------------------------------------
+# Machine-generated noise.
+# --------------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# Local publication controls and material excluded pending redistribution permission.
+/.private_identifiers
+/.private_identifiers.*
+!/.private_identifiers.example
+/paper_ref/
+/platon_instruction/
+# Owner-authorized upstream source is retained only in the private snapshot.
+# Weights and source transfer archives remain excluded by the rules above.
+# Any future native engine environment remains local and isolated.
+/.native-engine-env/
+/.local-engines/
+
+# Upstream CrystalX code is supplied by each user and never committed here.
+/crystalx_engine/

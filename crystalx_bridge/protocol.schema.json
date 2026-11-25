@@ -1,0 +1,532 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:autocryst:local-bridge:2026-11-20.1",
+  "title": "AutoCryst local bridge messages",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/request"
+    },
+    {
+      "$ref": "#/$defs/response"
+    }
+  ],
+  "$defs": {
+    "request": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "hello"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {},
+              "required": []
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "describe"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "language": {
+                  "enum": [
+                    "zh",
+                    "ja",
+                    "en"
+                  ]
+                }
+              },
+              "required": []
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "preview"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "frontend_contract": {
+                  "type": "string"
+                },
+                "request": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "frontend_contract",
+                "request"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "submit"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "frontend_contract": {
+                  "type": "string"
+                },
+                "request": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "frontend_contract",
+                "request"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "status"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "run_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "run_id"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "summary"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "run_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "run_id"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "cancel"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "run_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "run_id"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "export"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "run_id": {
+                  "type": "string"
+                },
+                "destination": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "run_id",
+                "destination"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "scene"
+            },
+            "params": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "run_id": {
+                  "type": "string"
+                },
+                "max_sites": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 2000
+                }
+              },
+              "required": [
+                "run_id"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "op": {
+              "const": "checkcif"
+            },
+            "params": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "action": {
+                      "const": "start"
+                    },
+                    "run_id": {
+                      "type": "string"
+                    },
+                    "timeout_s": {
+                      "type": "number",
+                      "exclusiveMinimum": 0,
+                      "maximum": 3600
+                    },
+                    "allow_builtin_checkdef": {
+                      "type": "boolean"
+                    },
+                    "checkdef_path": {
+                      "type": "string"
+                    },
+                    "checkdef_sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "platon_path": {
+                      "type": "string"
+                    },
+                    "strict_native": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "action",
+                    "run_id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "action": {
+                      "const": "status"
+                    },
+                    "run_id": {
+                      "type": "string"
+                    },
+                    "checkcif_id": {
+                      "type": "string",
+                      "pattern": "^c-[a-f0-9]{32}$"
+                    }
+                  },
+                  "required": [
+                    "action",
+                    "run_id",
+                    "checkcif_id"
+                  ]
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "action": {
+                      "const": "cancel"
+                    },
+                    "run_id": {
+                      "type": "string"
+                    },
+                    "checkcif_id": {
+                      "type": "string",
+                      "pattern": "^c-[a-f0-9]{32}$"
+                    }
+                  },
+                  "required": [
+                    "action",
+                    "run_id",
+                    "checkcif_id"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "id",
+            "op",
+            "params"
+          ]
+        }
+      ]
+    },
+    "response": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "frontend_contract": {
+              "type": "string"
+            },
+            "id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "ok": {
+              "const": true
+            },
+            "result": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "protocol",
+            "frontend_contract",
+            "id",
+            "ok",
+            "result"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "protocol": {
+              "const": "2026-11-20.1"
+            },
+            "frontend_contract": {
+              "type": "string"
+            },
+            "id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "ok": {
+              "const": false
+            },
+            "error": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "code",
+                "message"
+              ]
+            }
+          },
+          "required": [
+            "protocol",
+            "frontend_contract",
+            "id",
+            "ok",
+            "error"
+          ]
+        }
+      ]
+    }
+  }
+}
