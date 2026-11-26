@@ -17,9 +17,9 @@ SOURCE = ROOT / "crystalx_engine" / "inference_repo"
 
 
 @pytest.fixture
-def weights(tmp_path):
+def weights(tmp_path, source_root):
     torch.manual_seed(42)
-    classes = load_model_classes(SOURCE)
+    classes = load_model_classes(source_root)
     model = classes.TorchMD_Net(
         classes.TorchMD_ET(hidden_channels=16, num_layers=2, num_rbf=8),
         classes.EquivariantScalar(16, num_classes=32),
@@ -140,9 +140,9 @@ def test_optional_forced_coverage_preserves_raw_ranked_probability_results(weigh
     assert not covered.probabilities_calibrated
 
 
-def test_pinned_coverage_can_select_a_class_outside_raw_top_five():
+def test_pinned_coverage_can_select_a_class_outside_raw_top_five(source_root):
     from crystalx_core.app.inference_protocols import pinned_upstream_helper
-    coverage=pinned_upstream_helper(SOURCE,'enforce_coverage_by_prob')
+    coverage=pinned_upstream_helper(source_root,'enforce_coverage_by_prob')
     probabilities=torch.tensor([[.9,.02,.02,.02,.02,.02]]*6)
     labels=torch.tensor([6,7,8,9,16,17]);raw=labels[probabilities.argmax(dim=1)]
     before=probabilities.clone();chosen=coverage(probabilities,labels,raw.clone())

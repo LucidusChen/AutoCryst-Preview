@@ -5,7 +5,6 @@ import json
 import pytest
 
 from crystalx_engine_apple_silicon.cli import main
-from test_backend import SOURCE
 
 
 @pytest.fixture
@@ -51,8 +50,8 @@ def test_prepare_blocks_missing_malformed_or_mismatched_symmetry(inputs, operato
     assert json.loads(capsys.readouterr().err)["status"] == "failed"
 
 
-def test_parity_without_weights_is_blocked_and_never_reports_measurement(capsys):
-    assert main(["parity", "--source-root", str(SOURCE), "--provenance", "No owner-supplied checkpoint"]) == 3
+def test_parity_without_weights_is_blocked_and_never_reports_measurement(source_root, capsys):
+    assert main(["parity", "--source-root", str(source_root), "--provenance", "No owner-supplied checkpoint"]) == 3
     payload = json.loads(capsys.readouterr().out)
     assert payload["status"] == "BLOCKED"
     assert payload["trained_comparison_measured"] is False

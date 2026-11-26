@@ -25,10 +25,10 @@ SOURCE = Path(__file__).resolve().parents[2] / "crystalx_engine" / "inference_re
 
 
 @pytest.fixture
-def synthetic_weights(tmp_path):
+def synthetic_weights(tmp_path, source_root):
     with torch.random.fork_rng():
         torch.manual_seed(812)
-        classes = load_model_classes(SOURCE)
+        classes = load_model_classes(source_root)
         model = classes.TorchMD_Net(
             classes.TorchMD_ET(hidden_channels=16, num_layers=1, num_rbf=4),
             classes.EquivariantScalar(16, num_classes=32),
@@ -64,10 +64,10 @@ def test_fixed_dense_probe_exercises_real_cap_and_context():
     assert edges.shape == (2, 41 * 32)
 
 
-def test_missing_checkpoint_is_explicit_block_without_worker(monkeypatch):
+def test_missing_checkpoint_is_explicit_block_without_worker(source_root, monkeypatch):
     import crystalx_engine_apple_silicon.parity as module
     monkeypatch.setattr(module, "_run_worker", lambda *a, **k: pytest.fail("No weight may execute"))
-    report = measure_parity(SOURCE, provenance="No authorised official local checkpoint yet")
+    report = measure_parity(source_root, provenance="No authorised official local checkpoint yet")
     assert report["status"] == "BLOCKED"
     assert len(report["blocked_reasons"]) == 2
     assert report["comparisons"] == {}
@@ -95,11 +95,11 @@ def test_mismatched_checkpoint_digest_is_not_a_measurement(synthetic_weights):
 
 
 @pytest.mark.parametrize("relative", tuple(UPSTREAM_SHA256))
-def test_all_upstream_model_and_two_pass_sources_are_pinned(tmp_path, relative):
+def test_all_upstream_model_and_two_pass_sources_are_pinned(source_root, tmp_path, relative):
     for name in UPSTREAM_SHA256:
         destination = tmp_path / name
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(SOURCE / name, destination)
+        shutil.copyfile(source_root / name, destination)
     (tmp_path / relative).write_bytes((tmp_path / relative).read_bytes() + b"\nraise RuntimeError('must not execute')\n")
     with pytest.raises(SourceRevisionError):
         verify_upstream_sources(tmp_path)

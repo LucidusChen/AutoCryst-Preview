@@ -11,8 +11,8 @@ from crystalx_engine_apple_silicon.source import load_model_classes
 SOURCE = Path(__file__).resolve().parents[2] / "crystalx_engine" / "inference_repo"
 
 
-def test_synthetic_cli_is_explicit(capsys):
-    assert main(["self-test", "--source-root", str(SOURCE), "--device", "cpu"]) == 0
+def test_synthetic_cli_is_explicit(source_root, capsys):
+    assert main(["self-test", "--source-root", str(source_root), "--device", "cpu"]) == 0
     result = json.loads(capsys.readouterr().out)
     assert result["synthetic_weights"] and not result["trained_checkpoint_tested"]
     assert result["argmax_agreement"] and result["software_smoke_passed"]
@@ -20,14 +20,19 @@ def test_synthetic_cli_is_explicit(capsys):
     assert not result["result"]["scientific_validation_performed"]
 
 
-def test_strict_mps_refuses_implicit_fallback(monkeypatch, capsys):
+def test_strict_mps_refuses_implicit_fallback(source_root, monkeypatch, capsys):
     monkeypatch.setenv("PYTORCH_ENABLE_MPS_FALLBACK", "1")
-    assert main(["self-test", "--source-root", str(SOURCE), "--device", "mps", "--no-cpu-fallback"]) == 2
+    assert main(["self-test", "--source-root", str(source_root), "--device", "mps", "--no-cpu-fallback"]) == 2
     assert json.loads(capsys.readouterr().err)["error_type"] == "BackendUnavailable"
 
 
-def test_predict_writes_new_json_and_never_overwrites(tmp_path, capsys):
-    classes = load_model_classes(SOURCE)
+def test_missing_snapshot_cannot_pass_synthetic_self_test(tmp_path, capsys):
+    assert main(["self-test", "--source-root", str(tmp_path), "--device", "cpu"]) == 2
+    assert json.loads(capsys.readouterr().err)["error_type"] == "SourceRevisionError"
+
+
+def test_predict_writes_new_json_and_never_overwrites(source_root, tmp_path, capsys):
+    classes = load_model_classes(source_root)
     model = classes.TorchMD_Net(classes.TorchMD_ET(hidden_channels=16, num_layers=1, num_rbf=8),
                                 classes.EquivariantScalar(16, num_classes=32))
     weights = tmp_path / "synthetic.pth"
@@ -38,7 +43,7 @@ def test_predict_writes_new_json_and_never_overwrites(tmp_path, capsys):
                                 "candidate_atomic_numbers": [6, 8]}))
     original = sites.read_bytes()
     output = tmp_path / "result.json"
-    command = ["predict", "--source-root", str(SOURCE), "--checkpoint", str(weights),
+    command = ["predict", "--source-root", str(source_root), "--checkpoint", str(weights),
                "--input", str(sites), "--output", str(output), "--device", "cpu"]
     assert main(command) == 0
     result = json.loads(output.read_text())

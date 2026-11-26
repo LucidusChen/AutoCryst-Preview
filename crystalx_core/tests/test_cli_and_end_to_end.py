@@ -610,7 +610,7 @@ def test_the_core_declares_no_runtime_dependencies():
     # adding one is a deliberate act rather than a drift.
     assert set(extras) == {"dev", "geo"}
     assert all(spec.startswith("pytest") for spec in extras["dev"])
-    assert all(spec.startswith("gemmi") for spec in extras["geo"])
+    assert {spec.split(">=")[0] for spec in extras["geo"]} == {"gemmi", "scipy"}
 
 
 def test_the_package_is_runnable_without_being_installed():

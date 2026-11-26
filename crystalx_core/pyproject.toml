@@ -16,10 +16,8 @@ dependencies = []
 [project.optional-dependencies]
 dev = ["pytest>=7.4"]
 
-# Optional crystallographic helpers. The core never imports gemmi; only
-# crystalx_core.providers.gemmi_provider does, and only when an application asks for it.
-# Chosen over cctbx for size and installability (native arm64 wheel, ~MB not ~GB).
-geo = ["gemmi>=0.6"]
+# Optional geometry for symmetry expansion and heavy-stage neighbour searches.
+geo = ["gemmi>=0.6", "scipy>=1.9"]
 
 [project.scripts]
 crystalx = "crystalx_core.cli.main:main"

@@ -19,14 +19,6 @@ from crystalx_engine_apple_silicon.source import (
 )
 
 
-@pytest.fixture
-def source_root():
-    root = Path(__file__).resolve().parents[2] / "crystalx_engine" / "inference_repo"
-    if not (root / "crystalx_infer" / "models" / "torchmd_et.py").exists():
-        pytest.skip("Local upstream inference snapshot is not distributed with this adapter")
-    return root
-
-
 def _copy_sources(source_root, tmp_path):
     model_dir = tmp_path / "crystalx_infer" / "models"
     model_dir.mkdir(parents=True)
